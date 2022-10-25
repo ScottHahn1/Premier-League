@@ -1,0 +1,40 @@
+.report-heading {
+    height: 250px;
+    background-color: rgb(56,0,60);
+    background-image: url('https://www.premierleague.com/resources/prod/v6.101.4-4472/i/bg-elements/heading-bg-desktop.svg');
+    background-size: cover;
+    color: white;
+    display: flex;
+    align-items: center;
+    font-size: 40px;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-top: 15px;
+    padding-left: 10px;
+}
+
+.report {
+    margin-left: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.social-media-links {
+    display: flex;
+    color: rgb(233,0,82);
+    font-weight: bold;
+}
+
+.social-media-links > * {
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.social-media-links > *:visited {
+    color: rgb(233,0,82);
+    text-decoration: none;
+}
+
+@media screen and (min-width: 1024px) {
+    .report-images {
+        width: 100%
+    }
+}

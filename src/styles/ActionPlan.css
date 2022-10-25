@@ -1,0 +1,39 @@
+.heading {
+    height: 250px;
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    background-color: black;
+    color: white;
+    background-image: url('https://www.premierleague.com/resources/prod/v6.103.2-4532/i/bg-elements/promo-pattern-header-nrfr.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: right;
+}
+ 
+.heading > * {
+    margin-left: 10%;
+    padding-bottom: 0px;
+}
+
+.action-plan {
+    background-color: black;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.action-plan > * {
+    align-self: center;
+    margin-left: 10%;
+}
+
+@media screen and (min-width: 1024px) {
+    .action-plan-main {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #sleeve-badge {
+        margin-left: 0 !important; 
+    }
+}
