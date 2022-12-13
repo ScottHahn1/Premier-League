@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import GetFixtures from '../components/GetFixtures';
 import GetTeams from '../components/GetTeams';
 import RenderFixtures from '../components/RenderFixtures';
@@ -14,7 +14,7 @@ const Fixtures = () => {
     ]);
     const [loading, setLoading] = useState(true);
 
-    let groupFixtures = fixtures.filter(fixture => fixture.date > new Date()).sort((a, b) => a.round - b.round).reduce(function (a, b) {
+    let groupFixtures = fixtures.filter(fixture => fixture.date > new Date()).sort((a, b) => a.date - b.date).reduce(function (a, b) {
         a[b.date] = a[b.date] || [];
         a[b.date].push(b);
         return a;

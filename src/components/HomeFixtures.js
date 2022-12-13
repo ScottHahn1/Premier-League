@@ -14,7 +14,7 @@ const HomeFixtures = () => {
     const [sortByTime, setSortByTime] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    let groupFixtures = fixtures.filter(fixture => fixture.date > new Date()).sort((a, b) => a.round - b.round).reduce(function (a, b) {
+    let groupFixtures = fixtures.filter(fixture => fixture.date > new Date()).sort((a, b) => a.date - b.date).reduce(function (a, b) {
         a[b.date] = a[b.date] || [];
         a[b.date].push(b);
         return a;
