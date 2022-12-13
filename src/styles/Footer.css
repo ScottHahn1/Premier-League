@@ -43,7 +43,11 @@
     text-decoration: none;
 }
 
-.social-media-links:visited {
+.social-media-links:link, .social-media-links:visited {
+    color: white;
+}
+
+#footer-copyright {
     color: white;
 }
 

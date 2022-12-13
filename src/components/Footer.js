@@ -15,7 +15,7 @@ const Footer = () => {
             </div>
 
             <p id='copyright'>
-                <a href='https://github.com/ScottHahn1' target='_blank'>Copyright &copy; 2022 Scott Hahn &nbsp;<FaGithub size='1.2em' /> </a>
+                <a id='footer-copyright' href='https://github.com/ScottHahn1' target='_blank'>Copyright &copy; 2022 Scott Hahn &nbsp;<FaGithub size='1.2em' /> </a>
             </p>
 
             <div className='social-media'>

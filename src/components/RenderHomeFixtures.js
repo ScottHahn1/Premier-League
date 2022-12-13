@@ -21,7 +21,6 @@ const RenderHomeFixtures = ({sortByTime, teams, startingRound, loading, setLoadi
       teams.length && setLoading(false)
     });
 
-
     return (
       loading === false ?
       newFixtures.length > 0 && 

@@ -29,7 +29,7 @@ const Highlights = () => {
 
     return (  
         <div className='highlights-container'>
-                <h1 id='highlights'>Highlights</h1>
+                {videos.length > 0 && <h1 id='highlights'>Highlights</h1>}
                 <div className='highlights'>
                     {videos.map((item, index) => (
                         <div key={index}> 
