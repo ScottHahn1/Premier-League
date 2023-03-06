@@ -5,7 +5,7 @@ const ClubSites = () => {
     const [teams, setTeams] = useState([]);
 
     useEffect(() => {
-        fetch('https://www.thesportsdb.com/api/v1/json/2/search_all_teams.php?l=English%20Premier%20League')
+        fetch('https://www.thesportsdb.com/api/v1/json/3/search_all_teams.php?l=English%20Premier%20League')
         .then(response => response.json())
         .then(data => setTeams({logo: data.teams.map(team => team.strTeamBadge), website: data.teams.map(team => team.strWebsite)}))
     }, [])

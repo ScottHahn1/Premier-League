@@ -4,7 +4,7 @@ const GetResults = ({ setResults, rounds }) => {
     
     useEffect(() => {
         rounds.map(item => {
-            fetch(`https://www.thesportsdb.com/api/v1/json/2/eventsround.php?id=4328&r=${item}&s=2022-2023`)
+            fetch(`https://www.thesportsdb.com/api/v1/json/3/eventsround.php?id=4328&r=${item}&s=2022-2023`)
             .then(response => response.json())
             .then(data => {
                 data.events.map(item => {
