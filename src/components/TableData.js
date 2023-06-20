@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 const TableData = ({setTableData}) => {
 
     useEffect(() => {
-        fetch('https://www.thesportsdb.com/api/v1/json/3/lookuptable.php?l=4328&s=2022-2023')
+        fetch('https://www.thesportsdb.com/api/v1/json/3/lookuptable.php?l=4328&s=2023-2024')
         .then(response => response.json())
         .then(data => setTableData(
             { 

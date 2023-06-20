@@ -18,7 +18,7 @@ const RenderResults = ({sortByTime, teams, loading, setLoading}) => {
 
     return (
         loading === false ?
-        newResults.length > 0 && 
+        newResults.length > 0 ?
         newResults.map((item, index) =>
             <div key={index} className='results'>
                 <h1 id='results-date'>{sortByTime[index][0].date.toDateString()}</h1>
@@ -51,6 +51,8 @@ const RenderResults = ({sortByTime, teams, loading, setLoading}) => {
                 ))}
             </div>
         )
+        :
+        <h1 style={ {textAlign: 'center', fontSize: '4rem', color: 'indigo'} }>Season hasn't started yet!</h1>
         :
         <div className='loading-container'>
             <div className='loading'></div>
