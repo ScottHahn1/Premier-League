@@ -17,6 +17,7 @@ const RenderResults = ({ sortByTime, teams, loading, setLoading }) => {
   useEffect(() => {
     teams.length && setLoading(false);
   });
+  
   return loading === false ? (
     newResults.length > 0 ? (
       newResults.map((item, index) => (
@@ -24,44 +25,23 @@ const RenderResults = ({ sortByTime, teams, loading, setLoading }) => {
           <h1 id="results-date">{sortByTime[index][0].date.toDateString()}</h1>
           {sortByTime[index].map((item) => (
             <div key={`${(index += 1)}`} className="results-container">
-              <p key={`${index} ${(index += 2)}`}>{item.homeTeam}</p>
-              {teams
-                .filter((team) => team.name === item.homeTeam)
-                .map((team) => (
-                  <img
-                    key={`${index} ${(index += 3)}`}
-                    width="45px"
-                    height="45px"
-                    src={team.badge}
-                    alt={team.name}
-                  />
-                ))}
+              <p>{item.homeTeam}</p>
+              <img src={item.homeTeamBadge} alt={item.homeTeam} />
               {item.homeScore ? (
-                <p key={`${index} ${(index += 4)}`}>
+                <p>
                   {item.homeScore} - {item.awayScore}
                 </p>
               ) : (
-                <p key={`${index} ${(index += 4)}`}>TBD</p>
+                <p>TBD</p>
               )}
-              {teams
-                .filter((team) => team.name === item.awayTeam)
-                .map((team) => (
-                  <img
-                    key={`${index} ${(index += 5)}`}
-                    width="45px"
-                    height="45px"
-                    src={team.badge}
-                    alt={team.name}
-                  />
-                ))}
-              <p key={`${index} ${(index += 6)}`}>{item.awayTeam}</p>
+              <img src={item.awayTeamBadge} alt={item.awayTeam} />
+              <p>{item.awayTeam}</p>
               <img
-                key={`${index} ${(index += 7)}`}
                 width="50px"
                 src="https://cdn4.iconfinder.com/data/icons/buildings-and-structures-3/512/sports___stadium_soccer_football_fitness_building.png"
                 alt={item.team}
               />
-              <p key={`${index} ${(index += 8)}`}>{item.venue}</p>
+              <p>{item.venue}</p>
             </div>
           ))}
         </div>

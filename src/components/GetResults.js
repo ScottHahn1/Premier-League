@@ -11,6 +11,8 @@ const GetResults = ({ setResults, rounds }) => {
                     setResults(prev => [...prev, {
                         homeTeam: item.strHomeTeam,
                         awayTeam: item.strAwayTeam,
+                        homeTeamBadge: item.strHomeTeamBadge,
+                        awayTeamBadge: item.strAwayTeamBadge,
                         homeScore: item.intHomeScore,
                         awayScore: item.intAwayScore,
                         date: new Date(item.dateEvent),
