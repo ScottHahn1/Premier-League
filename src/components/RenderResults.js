@@ -17,11 +17,10 @@ const RenderResults = ({ sortByTime, teams, loading, setLoading }) => {
   useEffect(() => {
     teams.length && setLoading(false);
   });
-
   return loading === false ? (
     newResults.length > 0 ? (
       newResults.map((item, index) => (
-        <div key={index} className="results">
+        <div key={item} className="results">
           <h1 id="results-date">{sortByTime[index][0].date.toDateString()}</h1>
           {sortByTime[index].map((item) => (
             <div key={`${(index += 1)}`} className="results-container">
