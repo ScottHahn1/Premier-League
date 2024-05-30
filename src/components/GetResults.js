@@ -1,32 +1,31 @@
 import { useEffect } from 'react';
 
 const GetResults = ({ setResults, rounds }) => {
-    
     useEffect(() => {
-        rounds.map(item => {
-            fetch(`https://www.thesportsdb.com/api/v1/json/3/eventsround.php?id=4328&r=${item}&s=2023-2024`)
+        rounds.map(round => {
+            fetch(`https://www.thesportsdb.com/api/v1/json/3/eventsround.php?id=4328&r=${round}&s=2023-2024`)
             .then(response => response.json())
             .then(data => {
-                data.events.map(item => {
+                data.events.map(event => {
                     setResults(prev => [...prev, {
-                        homeTeam: item.strHomeTeam,
-                        awayTeam: item.strAwayTeam,
-                        homeTeamBadge: item.strHomeTeamBadge,
-                        awayTeamBadge: item.strAwayTeamBadge,
-                        homeScore: item.intHomeScore,
-                        awayScore: item.intAwayScore,
-                        date: new Date(item.dateEvent),
-                        venue: item.strVenue === 'The American Express Community Stadium' ? 'Amex Stadium' : item.strVenue,
-                        homeTeamId: item.idHomeTeam,
-                        awayTeamId: item.idAwayTeam,
-                        time: item.strTime,
-                        round: parseInt(item.intRound),
-                        id: item.idEvent
+                        homeTeam: event.strHomeTeam,
+                        awayTeam: event.strAwayTeam,
+                        homeTeamBadge: event.strHomeTeamBadge,
+                        awayTeamBadge: event.strAwayTeamBadge,
+                        homeScore: event.intHomeScore,
+                        awayScore: event.intAwayScore,
+                        date: new Date(event.dateEvent),
+                        venue: event.strVenue === 'The American Express Community Stadium' ? 'Amex Stadium' : event.strVenue,
+                        homeTeamId: event.idHomeTeam,
+                        awayTeamId: event.idAwayTeam,
+                        time: event.strTime,
+                        round: parseInt(event.intRound),
+                        id: event.idEvent
                     }]);
                 });
             });
         });
-    }, [rounds]);
+    }, []);
 };
 
 export default GetResults;
