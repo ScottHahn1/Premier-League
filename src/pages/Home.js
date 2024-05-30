@@ -9,11 +9,11 @@ const Home = () => {
     const [article, setArticle] = useState();
 
     useEffect(() => {
-        fetch(`https://gnews.io/api/v4/top-headlines?lang=en&q=premier%20league&token=2f867f8e9ffd6c133b2f527baec2de7b`)
+        fetch(`https://gnews.io/api/v4/top-headlines?lang=en&q=premier%20league&token=${process.env.REACT_APP_API_KEY}`)
         .then(response => response.json())
         .then(data => {
             setArticle(data.articles[Math.floor(Math.random() * data.articles.length)]);
-        });
+        })
     }, []);
 
     return (
