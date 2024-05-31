@@ -1,61 +1,38 @@
 import React from "react";
-import { useEffect, useState } from "react";
 
-const RenderResults = ({ sortByTime, teams, loading, setLoading }) => {
-  const [results, setResults] = useState([]);
-  const [newResults, setNewResults] = useState([]);
+const RenderResults = ({ sortByTime }) => {
 
-  useEffect(() => {
-    sortByTime.length &&
-      sortByTime.reverse().map((item, index) => {
-        results.length !== sortByTime.length &&
-          setResults((prev) => [...prev, index]);
-        results.length && setNewResults([...new Set(results)]);
-      });
-  }, [sortByTime]);
-
-  useEffect(() => {
-    teams.length && setLoading(false);
-  });
-  
-  return loading === false ? (
-    newResults.length > 0 ? (
-      newResults.map((item, index) => (
-        <div key={item} className="results">
+  return (
+    sortByTime.length > 0 ?
+      sortByTime.map((_, index) => (
+        <div className="results" key={sortByTime[index][0].id}>
           <h1 id="results-date">{sortByTime[index][0].date.toDateString()}</h1>
-          {sortByTime[index].map((item) => (
-            <div key={`${(index += 1)}`} className="results-container">
-              <p>{item.homeTeam}</p>
-              <img src={item.homeTeamBadge} alt={item.homeTeam} />
-              {item.homeScore ? (
-                <p>
-                  {item.homeScore} - {item.awayScore}
-                </p>
-              ) : (
-                <p>TBD</p>
-              )}
-              <img src={item.awayTeamBadge} alt={item.awayTeam} />
-              <p>{item.awayTeam}</p>
-              <img
-                width="50px"
-                src="https://cdn4.iconfinder.com/data/icons/buildings-and-structures-3/512/sports___stadium_soccer_football_fitness_building.png"
-                alt={item.team}
-              />
-              <p>{item.venue}</p>
-            </div>
-          ))}
+          {
+            sortByTime[index].map(match => (
+              <div className="results-container" key={match.id + 1}>
+                <p>{match.homeTeam}</p>
+                <img src={match.homeTeamBadge} alt={match.homeTeam} />
+                {match.homeScore ? 
+                  <p>{ match.homeScore } - { match.awayScore }</p>
+                  : 
+                  <p>TBD</p>
+                }
+                <img src={match.awayTeamBadge} alt={match.awayTeam} />
+                <p>{match.awayTeam}</p>
+                <img
+                  width="50px"
+                  src="https://cdn4.iconfinder.com/data/icons/buildings-and-structures-3/512/sports___stadium_soccer_football_fitness_building.png"
+                  alt={match.team}
+                />
+                <p>{match.venue}</p>
+              </div>
+            ))
+          }
         </div>
-      ))
-    ) : (
-      <h1 style={{ textAlign: "center", fontSize: "4rem", color: "indigo" }}>
-        Season hasn't started yet!
-      </h1>
-    )
-  ) : (
-    <div className="loading-container">
-      <div className="loading"></div>
-    </div>
-  );
+    )) 
+    : 
+    <h1 style={{ textAlign: "center", fontFamily: "Arial" }}>Season hasn't started yet!</h1>
+  )
 };
 
 export default RenderResults;
