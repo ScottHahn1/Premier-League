@@ -28,7 +28,7 @@ const HomeFixtures = () => {
 
     return (
         <div className='home-fixtures-main'>
-            <GetFixtures setFixtures={setFixtures} rounds={rounds} />
+            <GetFixtures setFixtures={setFixtures} rounds={rounds} setGotAllData={setGotAllData} />
             <GetTeams setTeams={setTeams} />
 
             { loading === false && <h2 style={{color: '#e90052'}}>Matchweek {startingRound[startingRound.length - 1]}</h2> }
