@@ -13,6 +13,7 @@ const HomeFixtures = () => {
     ]);
     const [sortByTime, setSortByTime] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [gotAllData, setGotAllData] = useState(false);
 
     let groupFixtures = fixtures.filter(fixture => fixture.date > new Date()).sort((a, b) => a.date - b.date).reduce(function (a, b) {
         a[b.date] = a[b.date] || [];
