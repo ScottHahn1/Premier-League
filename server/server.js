@@ -13,7 +13,12 @@ const app = express();
 const PORT = process.env.PORT;
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+    origin: ['*'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    methods: ['GET'],
+    credentials: true,
+}));
 
 app.use('/highlights', highlightsRouter);
 app.use('/news', newsRouter);
