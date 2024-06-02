@@ -7,7 +7,7 @@ const ClubSites = () => {
     useEffect(() => {
         fetch('https://premier-league-backend.vercel.app/teams')
         .then(response => response.json())
-        .then(data => data.length && setTeams({logo: data.teams.map(team => team.strTeamBadge), website: data.teams.map(team => team.strWebsite)}))
+        .then(data => setTeams({logo: data.teams.map(team => team.strTeamBadge), website: data.teams.map(team => team.strWebsite)}))
     }, [])
 
     return (
