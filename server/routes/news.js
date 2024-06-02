@@ -8,8 +8,7 @@ const newsRouter = express.Router();
 newsRouter.get('/', async (req, res) => {
    const response = await fetch('https://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/news');
    const data = await response.json();
-   res.status(200).json(data);
-
+   res.status(200).send(data);
 });
 
 newsRouter.get('/article', async (req, res) => {
