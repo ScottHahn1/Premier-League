@@ -1,12 +1,13 @@
 import { useEffect } from 'react';
 
-const GetFixtures = ({ setFixtures, rounds }) => {
+const GetFixtures = ({ setFixtures, rounds, setGotAllData }) => {
 
     useEffect(() => {
-        rounds.map(item => {
-            fetch(`https://www.thesportsdb.com/api/v1/json/3/eventsround.php?id=4328&r=${item}&s=2023-2024`)
+        rounds.map(round => {
+            fetch(`https://premier-league-backend.vercel.app/games/fixtures/${round}`)
             .then(response => response.json())
             .then(data => {
+                round === 38 && setGotAllData(true);
                 data.events.map(item => {
                     setFixtures(prev => [...prev, {
                         homeTeam: item.strHomeTeam,
@@ -22,7 +23,7 @@ const GetFixtures = ({ setFixtures, rounds }) => {
                 });
             });
         });
-    }, [rounds]);
+    }, []);
 };
   
 export default GetFixtures;

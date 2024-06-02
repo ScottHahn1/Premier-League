@@ -5,7 +5,7 @@ const News = () => {
     const [news, setNews] = useState([]);
 
     useEffect(() => {
-        fetch('https://site.api.espn.com/apis/site/v2/sports/soccer/eng.1/news')
+        fetch('https://premier-league-backend.vercel.app/news')
         .then(response => response.json())
         .then(data => data.articles.map(item => {
             setNews(prev => [...prev, {image: item.images[0].url, title: item.headline, description: item.description, link: item.links.web.href} ] );

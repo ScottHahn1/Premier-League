@@ -5,9 +5,9 @@ const ClubSites = () => {
     const [teams, setTeams] = useState([]);
 
     useEffect(() => {
-        fetch('https://www.thesportsdb.com/api/v1/json/3/search_all_teams.php?l=English%20Premier%20League')
+        fetch('https://premier-league-backend.vercel.app/teams')
         .then(response => response.json())
-        .then(data => setTeams({logo: data.teams.map(team => team.strTeamBadge), website: data.teams.map(team => team.strWebsite)}))
+        .then(data => data.length && setTeams({logo: data.teams.map(team => team.strTeamBadge), website: data.teams.map(team => team.strWebsite)}))
     }, [])
 
     return (
@@ -18,7 +18,7 @@ const ClubSites = () => {
              <a key={index} 
                 href={ `//${teams.website[index]}` } 
                 target="_blank"> 
-                <img className='site-badges' 
+                <img className='site-badges'
                 src={item} /> 
              </a>)
             }

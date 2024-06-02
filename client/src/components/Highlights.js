@@ -5,17 +5,17 @@ import parse from 'html-react-parser';
 const Highlights = () => {
     const [videos, setVideos] = useState([]);
 
-    // useEffect(() => {
-    //     fetch('http://localhost:8500/highlights')
-    //     .then(response => response.json())
-    //     .then(data => {
-    //         setVideos(data.filter(item => item.competition.name === 'ENGLAND: Premier League'));
-    //     })
-    // }, []);
+    useEffect(() => {
+        fetch('https://premier-league-backend.vercel.app/highlights')
+        .then(response => response.json())
+        .then(data => {
+            setVideos(data.filter(item => item.competition.name === 'ENGLAND: Premier League'));
+        })
+    }, []);
     
     return (  
         <div className='highlights-container'>
-            {/* {videos.length > 0 && <h1 id='highlights'>Highlights</h1>}
+            {videos.length > 0 && <h1 id='highlights'>Highlights</h1>}
             <div className='highlights'>
                 {videos.map((item, index) => (
                     <div key={index}> 
@@ -29,7 +29,7 @@ const Highlights = () => {
                         </strong>
                     </div>
                 ))}
-            </div> */}
+            </div>
         </div>
     )
 };

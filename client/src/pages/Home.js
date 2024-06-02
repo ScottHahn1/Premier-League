@@ -9,7 +9,7 @@ const Home = () => {
     const [article, setArticle] = useState();
 
     useEffect(() => {
-        fetch(`https://gnews.io/api/v4/top-headlines?lang=en&q=premier%20league&token=${process.env.REACT_APP_API_KEY}`)
+        fetch('https://premier-league-backend.vercel.app/news/article')
         .then(response => response.json())
         .then(data => {
             setArticle(data.articles[Math.floor(Math.random() * data.articles.length)]);

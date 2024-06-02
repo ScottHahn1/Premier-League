@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 const GetTeams = ({ setTeams }) => {
 
     useEffect(() => {
-        fetch('https://www.thesportsdb.com/api/v1/json/3/search_all_teams.php?l=English%20Premier%20League')
+        fetch('https://premier-league-backend.vercel.app/teams')
         .then(response => response.json())
         .then(data => data.teams.map(item => {
             setTeams(prev => [...prev, {
