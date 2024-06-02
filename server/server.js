@@ -14,7 +14,7 @@ const PORT = process.env.PORT;
 
 app.use(express.json());
 app.use(cors({
-    origin: ['*'],
+    origin: ['https://scotthahn1.github.io/Premier-League/'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     methods: ['GET'],
     credentials: true,
