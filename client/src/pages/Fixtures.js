@@ -3,8 +3,10 @@ import { useState, useEffect } from 'react';
 import GetFixtures from '../components/GetFixtures';
 import RenderFixtures from '../components/RenderFixtures';
 import '../styles/Fixtures.css';
+import GetTeams from '../components/GetTeams';
 
 const Fixtures = () => {
+    const [teams, setTeams] = useState([]);
     const [fixtures, setFixtures] = useState([]);
     const rounds = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38];
     const [loading, setLoading] = useState(true);
@@ -31,8 +33,9 @@ const Fixtures = () => {
                 <h1>Fixtures</h1>
             </div> 
             
+            <GetTeams setTeams={setTeams} />
             <GetFixtures setFixtures={setFixtures} rounds={rounds} setGotAllData={setGotAllData} />
-            <RenderFixtures sortByTime={sortByTime} loading={loading} />
+            <RenderFixtures sortByTime={sortByTime} teams={teams} loading={loading} />
         </>
     )
 };
