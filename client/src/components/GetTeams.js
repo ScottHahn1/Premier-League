@@ -7,7 +7,7 @@ const GetTeams = ({ setTeams }) => {
         .then(response => response.json())
         .then(data => data.teams.map(item => {
             setTeams(prev => [...prev, {
-                badge: item.strTeamBadge,
+                badge: item.strBadge,
                 location: item.strStadiumLocation,
                 jersey: item.strTeamJersey,
                 name: item.strTeam,
