@@ -8,7 +8,7 @@ const TableData = ({setTableData}) => {
         .then(data => setTableData(
             { 
                 position: data.table.map(item => item.intRank), 
-                teamBadge: data.table.map(item => item.strTeamBadge),
+                teamBadge: data.table.map(item => item.strBadge),
                 teamName: data.table.map(item => item.strTeam),
                 gamesPlayed: data.table.map(item => item.intPlayed),
                 goalDifference: data.table.map(item => item.intGoalDifference),
@@ -18,7 +18,6 @@ const TableData = ({setTableData}) => {
                 gamesLost: data.table.map(item => item.intLoss),
                 scored: data.table.map(item => item.intGoalsFor),
                 conceded: data.table.map(item => item.intGoalsAgainst),
-                goalDifference: data.table.map(item => item.intGoalDifference),
                 form: data.table.map(item => item.strForm.split('').join(' '))
             }))
     }, []);
