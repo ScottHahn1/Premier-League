@@ -12,7 +12,7 @@ newsRouter.get('/', async (req, res) => {
 });
 
 newsRouter.get('/article', async (req, res) => {
-    const response = await fetch(`https://gnews.io/api/v4/top-headlines?lang=en&q=premier%20league&token=${process.env.REACT_APP_NEWS_API_KEY}`);
+    const response = await fetch(`https://gnews.io/api/v4/top-headlines?lang=en&q=football%20english%20premier%20league&token=${process.env.REACT_APP_NEWS_API_KEY}`);
     const data = await response.json();
     res.status(200).send(data);
 });
