@@ -12,7 +12,7 @@ gamesRouter.get('/fixtures/:round', async (req, res) => {
 });
 
 gamesRouter.get('/results/:round', async (req, res) => {
-    const response = await fetch(`https://www.thesportsdb.com/api/v1/json/3/eventsround.php?id=4328&r=${req.params.round}&s=2023-2024`);
+    const response = await fetch(`https://www.thesportsdb.com/api/v1/json/3/eventsround.php?id=4328&r=${req.params.round}&s=2024-2025`);
     const data = await response.json();
     res.status(200).send(data);
 });
