@@ -11,9 +11,9 @@ export const Navbar = () => {
   return (
     <>
       <ClubSites />
-      <div className='navbar'>
+      <div className='navbar poppins'>
           <div className='logo-container'>
-            <Link to='/'> <img className='pl-logo' src={PremierLeagueLogo} /> </Link>
+            <Link to='/'> <img className='pl-logo' src={PremierLeagueLogo} alt='Premier League logo' /> </Link>
             <h2 id='logo-title'>Premier League</h2>
           </div>
 
