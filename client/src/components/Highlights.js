@@ -22,11 +22,9 @@ const Highlights = () => {
                         { parse(item.videos[0].embed.toString())} 
                         <h4>{item.title}</h4>  
                         <hr></hr>
-                        <strong> 
-                            <p style={{color: 'rgb(233,0,82)'}}>
+                            <p className='poppins-semiBold-italic' style={{color: 'rgb(233,0,82)'}}>
                                 { new Date(item.date).toString().slice(0, 15) }
                             </p> 
-                        </strong>
                     </div>
                 ))}
             </div>
