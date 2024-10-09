@@ -15,7 +15,7 @@ function App() {
     <Router>
       <Navbar />
       <div className="app">
-        <div className="content-wrapper">
+        <div className="content-wrapper poppins">
           <Routes>
             <Route path='/' element={ <Home /> } />
             <Route path='/fixtures' element={ <Fixtures /> } />
