@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 const Footer = () => {
     return (
-        <footer className='footer'>
+        <footer className='footer poppins'>
             <div className='navigation'>
                 <h2>Navigation</h2>
                 <Link className='social-media-links' to='/'> <p>Home</p> </Link>
