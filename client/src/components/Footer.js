@@ -1,6 +1,7 @@
 import React from 'react';
 import '../styles/Footer.css';
-import {FaFacebookF, FaTwitter, FaYoutube, FaInstagram, FaGithub} from 'react-icons/fa';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFacebook, faGithub, faInstagram, faTwitter, faYoutube } from '@fortawesome/free-brands-svg-icons';
 import { Link } from 'react-router-dom';
 
 const Footer = () => {
@@ -15,22 +16,22 @@ const Footer = () => {
             </div>
 
             <p id='copyright'>
-                <a id='footer-copyright' href='https://github.com/ScottHahn1' target='_blank'>Copyright &copy; 2022 Scott Hahn &nbsp;<FaGithub size='1.2em' /> </a>
+                <a id='footer-copyright' href='https://github.com/ScottHahn1' target='_blank' rel="noreferrer">Copyright &copy; 2024 Scott Hahn &nbsp;<FontAwesomeIcon icon={faGithub} size='2x' /> </a>
             </p>
 
             <div className='social-media'>
                 <h2>Social Media</h2>
                 <p> 
-                    <a className='social-media-links' href='https://www.facebook.com/premierleague' target='_blank'> PL on Facebook &nbsp; <FaFacebookF size='1.2em' /> </a> 
+                    <a className='social-media-links' href='https://www.facebook.com/premierleague' target='_blank' rel="noreferrer"> PL on Facebook &nbsp; <FontAwesomeIcon icon={faFacebook} size='2x' /> </a> 
                 </p>
                 <p> 
-                    <a className='social-media-links' href='https://twitter.com/premierleague' target='_blank'> PL on Twitter &nbsp; <FaTwitter size='1.2em' /> </a>
+                    <a className='social-media-links' href='https://twitter.com/premierleague' target='_blank' rel="noreferrer"> PL on Twitter &nbsp; <FontAwesomeIcon icon={faTwitter} size='2x' /> </a>
                 </p>
                 <p> 
-                    <a className='social-media-links' href='https://www.youtube.com/premierleague' target='_blank'> PL on Youtube &nbsp; <FaYoutube size='1.2em' /> </a> 
+                    <a className='social-media-links' href='https://www.youtube.com/premierleague' target='_blank' rel="noreferrer"> PL on Youtube &nbsp; <FontAwesomeIcon icon={faYoutube} size='2x' /> </a> 
                 </p>
                 <p> 
-                    <a className='social-media-links' href='https://www.instagram.com/premierleague/' target='_blank'> PL on Instagram &nbsp; <FaInstagram size='1.2em' /> </a> 
+                    <a className='social-media-links' href='https://www.instagram.com/premierleague/' target='_blank' rel="noreferrer"> PL on Instagram &nbsp; <FontAwesomeIcon icon={faInstagram} size='2x' /> </a> 
                 </p>
             </div>
         </footer>
