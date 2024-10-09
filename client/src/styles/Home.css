@@ -1,7 +1,3 @@
-.home {
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
 .home-main-container {
     height: 30rem;
     margin-top: 1rem;
@@ -134,7 +130,7 @@
 /* Home Fixtures */
 .home-fixtures-main {
     background-color: white;
-    font-family: Arial, Helvetica, sans-serif;
+    /* font-family: Arial, Helvetica, sans-serif; */
     width: 90%;
     border: 1px solid rgba(211,211,211, 0.4);
     border-radius: .5em;
@@ -200,7 +196,7 @@
     flex-direction: column;
     align-items: center;
     font-size: .8em;
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
     width: 7.6em;
 }
 
@@ -211,6 +207,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.home-table-names {
+    text-align: center;
 }
 
 .home-table-names > * {
