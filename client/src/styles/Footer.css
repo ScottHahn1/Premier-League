@@ -4,7 +4,6 @@
     color: white;
     display: flex;
     justify-content: space-evenly;
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .navigation, .social-media {
