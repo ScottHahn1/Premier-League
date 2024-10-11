@@ -16,7 +16,7 @@ const HomeTable = () => {
             
             <div className='home-table-badges'>
                 <h3>Badge</h3>
-                {tableData.teamBadge && tableData.teamBadge.map((badge, index) => <img key={`${index}1`} src={badge} />)}
+                {tableData.teamBadge && tableData.teamBadge.map((badge, index) => <img key={`${index}1`} src={badge} alt='Club badge' />)}
             </div>
 
             <div className='home-table-names'>
