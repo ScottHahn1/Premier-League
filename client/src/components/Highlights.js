@@ -18,10 +18,10 @@ const Highlights = () => {
             {videos.length > 0 && <h1 id='highlights'>Highlights</h1>}
             <div className='highlights'>
                 {videos.map((item, index) => (
-                    <div key={index}> 
+                    <div key={index} className='highlight'> 
                         { parse(item.videos[0].embed.toString())} 
                         <h4>{item.title}</h4>  
-                        <hr></hr>
+                        {/* <hr></hr> */}
                         <p className='poppins-semiBold-italic' style={{color: 'rgb(233,0,82)'}}>
                             { new Date(item.date).toString().slice(0, 15) }
                         </p> 
