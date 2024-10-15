@@ -24,8 +24,11 @@ const Table = () => {
 
                     <div className='table-badges'>
                         <h5>Badge</h5>
-                        {tableData.teamBadge && tableData.teamBadge.map((badge, index) => 
-                        <img key={index} src={badge} />)}
+                        {
+                            tableData.teamBadge && tableData.teamBadge.map((badge, index) => (
+                                <img key={index} src={badge} alt={`${tableData.teamName[index]}'s logo`} />
+                            )
+                        )}
                     </div>
 
                     <div className='table-names'>

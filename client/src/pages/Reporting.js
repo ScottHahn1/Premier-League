@@ -37,11 +37,11 @@ const Reporting = () => {
                 <p>Below are simple guides as to how to report an abusive post on Instagram, Facebook and Twitter.</p>
                 <br></br>
 
-                <img className='report-images' src='https://resources.premierleague.com/photos/2021/04/15/5017be38-b458-4db5-90cb-707d2b45bcc3/PL_NRFR_REPORT_INSTA_16x9_V2.jpg?width=1350&height=759' />
+                <img className='report-images' src='https://resources.premierleague.com/photos/2021/04/15/5017be38-b458-4db5-90cb-707d2b45bcc3/PL_NRFR_REPORT_INSTA_16x9_V2.jpg?width=1350&height=759' alt='Report racism - Instagram' />
                 <br></br> <br></br> <br></br>
-                <img className='report-images' src='https://resources.premierleague.com/photos/2021/04/15/e1e8e0fa-1760-4dd5-87d8-5ee5cd3eca85/PL_NRFR_REPORT_FACEBOOK_16x9_V2.jpg?width=1350&height=759' />
+                <img className='report-images' src='https://resources.premierleague.com/photos/2021/04/15/e1e8e0fa-1760-4dd5-87d8-5ee5cd3eca85/PL_NRFR_REPORT_FACEBOOK_16x9_V2.jpg?width=1350&height=759' alt='Report racism - Facebook' />
                 <br></br> <br></br> <br></br>
-                <img className='report-images' src='https://resources.premierleague.com/photos/2021/04/15/36473bd9-164d-4df8-a859-83e40427bd29/PL_NRFR_REPORT_TWITTER_16x9_V2.jpg?width=1350&height=759' />
+                <img className='report-images' src='https://resources.premierleague.com/photos/2021/04/15/36473bd9-164d-4df8-a859-83e40427bd29/PL_NRFR_REPORT_TWITTER_16x9_V2.jpg?width=1350&height=759' alt='Report racism Twitter' />
                 <br></br> <br></br> <br></br>
 
             </div>
