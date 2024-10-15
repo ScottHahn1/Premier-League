@@ -24,14 +24,14 @@ const Reporting = () => {
                 <p>Click on the relevant links below for how to report for each platform</p>
             
                 <div className='social-media-links'>
-                    <a href='https://help.twitter.com/en/rules-and-policies/twitter-report-violation' target='_blank'> <h4>Twitter |</h4> </a> &nbsp;
-                    <a href='https://www.facebook.com/help/263149623790594/' target='_blank'> <h4>Facebook |</h4></a> &nbsp;
-                    <a href='https://help.instagram.com/372161259539444' target='_blank'> <h4>Instagram</h4> </a>
+                    <a href='https://help.twitter.com/en/rules-and-policies/twitter-report-violation' target='_blank' rel='noreferrer'> <h4>Twitter |</h4> </a> &nbsp;
+                    <a href='https://www.facebook.com/help/263149623790594/' target='_blank' rel='noreferrer'> <h4>Facebook |</h4></a> &nbsp;
+                    <a href='https://help.instagram.com/372161259539444' target='_blank' rel='noreferrer'> <h4>Instagram</h4> </a>
                 </div>
                 <div className='social-media-links'>
-                    <a href='https://support.google.com/youtube/answer/2802027' target='_blank'> <h4>Youtube |</h4> </a> &nbsp;
-                    <a href='https://support.tiktok.com/en' target='_blank'> <h4>TikTok |</h4> </a> &nbsp;
-                    <a href='https://www.snap.com/en-US/safety/safety-reporting' target='_blank'> <h4>Snapchat</h4> </a>
+                    <a href='https://support.google.com/youtube/answer/2802027' target='_blank' rel='noreferrer'> <h4>Youtube |</h4> </a> &nbsp;
+                    <a href='https://support.tiktok.com/en' target='_blank ' rel='noreferrer'> <h4>TikTok |</h4> </a> &nbsp;
+                    <a href='https://www.snap.com/en-US/safety/safety-reporting' target='_blank' rel='noreferrer'> <h4>Snapchat</h4> </a>
                 </div>
 
                 <p>Below are simple guides as to how to report an abusive post on Instagram, Facebook and Twitter.</p>
