@@ -14,12 +14,13 @@ const ClubSites = () => {
         teams.logo ?
         <div className='club-sites'>
             <h4 id='club-sites-heading' style={{color: 'gray'}}>Club Sites &#8594;</h4> 
-            {teams.logo.map((item, index) =>
-             <a key={index} 
+            {teams.logo.map((logo, index) =>
+             <a 
+                key={index}
+                without rel="noreferrer" 
                 href={ `//${teams.website[index]}` } 
-                target="_blank"> 
-                <img className='site-badges'
-                src={item} /> 
+                target="_blank">
+                <img className='site-badges' src={logo} alt={`${logo} logo`} /> 
              </a>)
             }
         </div>
