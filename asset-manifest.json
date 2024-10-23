@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/Premier-League/static/css/main.092d2619.css",
-    "main.js": "/Premier-League/static/js/main.9404d8e6.js",
+    "main.js": "/Premier-League/static/js/main.fe10ba6a.js",
     "static/media/PremierLeagueLogo.png": "/Premier-League/static/media/PremierLeagueLogo.324de81b7c89eef8cc7c.png",
     "index.html": "/Premier-League/index.html",
     "main.092d2619.css.map": "/Premier-League/static/css/main.092d2619.css.map",
-    "main.9404d8e6.js.map": "/Premier-League/static/js/main.9404d8e6.js.map"
+    "main.fe10ba6a.js.map": "/Premier-League/static/js/main.fe10ba6a.js.map"
   },
   "entrypoints": [
     "static/css/main.092d2619.css",
-    "static/js/main.9404d8e6.js"
+    "static/js/main.fe10ba6a.js"
   ]
 }
