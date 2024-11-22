@@ -10,7 +10,7 @@ const { teamsRouter } = require('./routes/teams');
 dotenv.config();
 const app = express();
 
-const PORT = process.env.REACT_APP_PORT;
+const PORT = process.env.PORT;
 
 app.use(express.json());
 app.use(cors());

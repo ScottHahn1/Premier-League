@@ -8,7 +8,7 @@ highlightsRouter.get('/', async (req, res) => {
     const options = {
         method: 'GET',
         headers: {
-            'X-RapidAPI-Key': process.env.REACT_APP_HIGHLIGHTS_API_KEY,
+            'X-RapidAPI-Key': process.env.HIGHLIGHTS_API_KEY,
             'X-RapidAPI-Host': 'free-football-soccer-videos.p.rapidapi.com'
         }
     };
