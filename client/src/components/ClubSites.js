@@ -17,7 +17,7 @@ const ClubSites = () => {
             {teams.logo.map((logo, index) =>
              <a 
                 key={index}
-                without rel="noreferrer" 
+                rel="noreferrer" 
                 href={ `//${teams.website[index]}` } 
                 target="_blank">
                 <img className='site-badges' src={logo} alt={`${logo} logo`} /> 
