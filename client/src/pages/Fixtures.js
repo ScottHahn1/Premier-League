@@ -1,31 +1,21 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import GetFixtures from '../components/GetFixtures';
 import RenderFixtures from '../components/RenderFixtures';
 import '../styles/Fixtures.css';
 import GetTeams from '../components/GetTeams';
+import useFetch from '../hooks/useFetch';
 
 const Fixtures = () => {
     const [teams, setTeams] = useState([]);
-    const [fixtures, setFixtures] = useState([]);
-    const rounds = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38];
     const [loading, setLoading] = useState(true);
-    const [gotAllData, setGotAllData] = useState(false);
 
-    let groupFixtures = fixtures.filter(fixture => fixture.date > new Date()).sort((a, b) => a.date - b.date).reduce(function (a, b) {
-        a[b.date] = a[b.date] || [];
-        a[b.date].push(b);
-        return a;
-    }, Object.create(null));
-
-    let toArray = Object.values(groupFixtures);
-    let sortByTime = toArray.length && toArray.map(item => item.sort((a, b) => a.time.localeCompare(b.time)));
+    const { data: fixtures } = useFetch(`games/fixtures`);
 
     useEffect(() => {
-        if (gotAllData) {
+        if (fixtures) {
             setLoading(false);
         }
-    }, [gotAllData])
+    }, [fixtures])
 
     return (
         <>
@@ -34,8 +24,7 @@ const Fixtures = () => {
             </div> 
             
             <GetTeams setTeams={setTeams} />
-            <GetFixtures setFixtures={setFixtures} rounds={rounds} setGotAllData={setGotAllData} />
-            <RenderFixtures sortByTime={sortByTime} teams={teams} loading={loading} />
+            <RenderFixtures fixtures={fixtures} teams={teams} loading={loading} />
         </>
     )
 };
