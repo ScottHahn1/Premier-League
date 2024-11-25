@@ -1,43 +1,33 @@
-import React from 'react';
-import { useEffect, useState } from 'react';
+import SeasonNotStarted from "./SeasonNotStarted";
 
-const RenderFixtures = ({ sortByTime, teams, loading }) => {
-    const [fixtures, setFixtures] = useState([]);
-    const [newFixtures, setNewFixtures] = useState([]);
-
-    useEffect(() => {
-        sortByTime.length && sortByTime.map((item, index) => {
-            fixtures.length !== sortByTime.length && setFixtures( prev => [...prev, index]);
-            fixtures.length && setNewFixtures([...new Set(fixtures)]);
-        })
-    }, [sortByTime]);
-
+const RenderFixtures = ({ fixtures, teams, loading }) => {
     return (
         <>
             {
                 loading === false ? 
-                newFixtures.length > 0 &&
-                newFixtures.map((fixture, index) =>
+                fixtures.map((fixtureGroup, index) =>
                     <div key={index} className='fixtures'>
-                        <h1 id='fixture-date'>{sortByTime[index][0].date.toDateString()}</h1>
-                        { sortByTime[index].map((item, index) => (
+                        <h1 id='fixture-date'>
+                            { new Date(fixtures[index][0].dateEvent).toDateString() }
+                        </h1>
+                        { fixtures[index].map((item, index) => (
                             <div key={`${index} ${index += 1}`} className='fixtures-container'>
                                 <p>
-                                    {item.homeTeam}
+                                    {item.strHomeTeam}
                                 </p>
                                 { 
-                                    teams.filter(team => team.name === item.homeTeam)
+                                    teams.filter(team => team.name === item.strHomeTeam)
                                     .map(team => <img key={`${index} ${index += 3}`} className='home-badge' src={team.badge} /> ) 
                                 }
                                 <p> 
-                                    { Array.from(item.time).slice(0, 5) } 
+                                    { Array.from(item.strTime).slice(0, 5) } 
                                 </p>
                                 { 
-                                    teams.filter(team => team.name === item.awayTeam)
+                                    teams.filter(team => team.name === item.strAwayTeam)
                                     .map(team => <img key={`${index} ${index += 5}`} className='away-badge' src={team.badge} /> ) 
                                 }
                                 <p>
-                                    {item.awayTeam}
+                                    {item.strAwayTeam}
                                 </p>
                                 <img 
                                     width='50px' 
@@ -57,15 +47,7 @@ const RenderFixtures = ({ sortByTime, teams, loading }) => {
             }
 
             { 
-                loading === false && newFixtures.length === 0 && 
-                <>
-                    <h1 style={{ textAlign: "center", fontFamily: "Arial" }}>
-                        Season hasn't started yet! 
-                    </h1>
-                    <h2 style={{ textAlign: "center", fontFamily: "Arial" }}>
-                        All Premier League fixtures for 2024-25 will be released on June 18, 2024.
-                    </h2>
-                </>
+                loading === false && !fixtures && <SeasonNotStarted />
             }
         </>
     )
