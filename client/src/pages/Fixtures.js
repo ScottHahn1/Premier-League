@@ -9,7 +9,7 @@ const Fixtures = () => {
     const [teams, setTeams] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    const { data: fixtures } = useFetch(`games/fixtures`);
+    const { data: fixtures } = useFetch('fixtures');
 
     useEffect(() => {
         if (fixtures) {
