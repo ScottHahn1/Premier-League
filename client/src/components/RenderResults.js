@@ -1,30 +1,32 @@
 import React from "react";
 
-const RenderResults = ({ sortByTime }) => {
+const RenderResults = ({ results }) => {
 
   return (
-    sortByTime.length > 0 ?
-      sortByTime.map((_, index) => (
-        <div className="results" key={sortByTime[index][0].id}>
-          <h1 id="results-date">{sortByTime[index][0].date.toDateString()}</h1>
+    results.length > 0 ?
+      results.map((resultsGroup, index) => (
+        <div className="results" key={resultsGroup[0].idEvent}>
+          <h1 id="results-date">
+            { new Date(results[index][0].dateEvent).toDateString() }
+          </h1>
           {
-            sortByTime[index].map(match => (
-              <div className="results-container" key={match.id + 1}>
-                <p>{match.homeTeam}</p>
-                <img src={match.homeTeamBadge} alt={match.homeTeam} />
-                {match.homeScore ? 
-                  <p>{ match.homeScore } - { match.awayScore }</p>
+            results[index].map(result => (
+              <div className="results-container" key={result.idEvent}>
+                <p>{result.strHomeTeam}</p>
+                <img src={result.strHomeTeamBadge} alt={result.strHomeTeam} />
+                {result.intHomeScore ? 
+                  <p>{ result.intHomeScore } - { result.intAwayScore }</p>
                   : 
                   <p>TBD</p>
                 }
-                <img src={match.awayTeamBadge} alt={match.awayTeam} />
-                <p>{match.awayTeam}</p>
+                <img src={result.strAwayTeamBadge} alt={result.strAwayTeam} />
+                <p>{result.strAwayTeam}</p>
                 <img
                   width="50px"
                   src="https://cdn4.iconfinder.com/data/icons/buildings-and-structures-3/512/sports___stadium_soccer_football_fitness_building.png"
-                  alt={match.team}
+                  alt='Stadium'
                 />
-                <p>{match.venue}</p>
+                <p>{result.strVenue}</p>
               </div>
             ))
           }
