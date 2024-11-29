@@ -1,20 +1,22 @@
 import { useEffect } from 'react';
+import useFetch from '../hooks/useFetch';
 
 const GetTeams = ({ setTeams }) => {
+    const { data } = useFetch('teams');
 
     useEffect(() => {
-        fetch('https://premier-league-backend.vercel.app/teams')
-        .then(response => response.json())
-        .then(data => data.teams.map(item => {
-            setTeams(prev => [...prev, {
-                badge: item.strBadge,
-                location: item.strStadiumLocation,
-                jersey: item.strTeamJersey,
-                name: item.strTeam,
-                abbName: item.strTeamShort
-            }])
-        }))
-    }, [])
+        if (data) {
+            const teams = data.teams.map(team => ({
+                badge: team.strBadge,
+                location: team.strStadiumLocation,
+                jersey: team.strTeamJersey,
+                name: team.strTeam,
+                abbName: team.strTeamShort
+            }))
+
+            setTeams(teams);
+        }
+    }, [data])
 };
 
 export default GetTeams;

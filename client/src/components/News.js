@@ -1,16 +1,25 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
+import useFetch from '../hooks/useFetch';
 
 const News = () => {
     const [news, setNews] = useState([]);
 
+    const { data } = useFetch('news');
+
     useEffect(() => {
-        fetch('https://premier-league-backend.vercel.app/news')
-        .then(response => response.json())
-        .then(data => data.articles.map(item => {
-            setNews(prev => [...prev, {image: item.images[0].url, title: item.headline, description: item.description, link: item.links.web.href} ] );
-        }));
-    }, []);
+        if (data) {
+            console.log(data);
+            const newsData =  data.articles.map(item => ({
+                image: item.images[0].url, 
+                title: item.headline, 
+                description: item.description, 
+                link: item.links.web.href
+            }))
+
+            setNews(newsData);
+        }
+    }, [data]);
 
     return (
         <div className='news-container'>

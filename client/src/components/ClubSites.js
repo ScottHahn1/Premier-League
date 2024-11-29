@@ -1,14 +1,20 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
+import useFetch from '../hooks/useFetch';
 
 const ClubSites = () => {
     const [teams, setTeams] = useState([]);
 
+    const { data } = useFetch('teams');
+
     useEffect(() => {
-        fetch('https://premier-league-backend.vercel.app/teams')
-        .then(response => response.json())
-        .then(data => setTeams({logo: data.teams.map(team => team.strBadge), website: data.teams.map(team => team.strWebsite)}))
-    }, [])
+        if (data) {
+            setTeams({ 
+                logo: data.teams.map(team => team.strBadge), 
+                website: data.teams.map(team => team.strWebsite) 
+            });
+        }
+    }, [data])
 
     return (
         teams.logo ?

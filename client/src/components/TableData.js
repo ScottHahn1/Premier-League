@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
+import useFetch from '../hooks/useFetch';
 
-const TableData = ({setTableData}) => {
+const TableData = ({ setTableData }) => {
+    const { data } = useFetch('stats/table');
 
     useEffect(() => {
-        fetch('https://premier-league-backend.vercel.app/stats/table')
-        .then(response => response.json())
-        .then(data => setTableData(
-            { 
+        if (data) {
+            const tableData =  { 
                 position: data.table.map(item => item.intRank), 
                 teamBadge: data.table.map(item => item.strBadge),
                 teamName: data.table.map(item => item.strTeam),
@@ -19,8 +19,11 @@ const TableData = ({setTableData}) => {
                 scored: data.table.map(item => item.intGoalsFor),
                 conceded: data.table.map(item => item.intGoalsAgainst),
                 form: data.table.map(item => item.strForm.split('').join(' '))
-            }))
-    }, []);
+            }
+
+            setTableData(tableData);
+        }
+    }, [data])
 };
 
 export default TableData;
