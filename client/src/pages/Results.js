@@ -20,7 +20,7 @@ const Results = () => {
 
             {
                 !loading ? 
-                <RenderResults results={results} />
+                <RenderResults results={results.reverse()} />
                 :
                 <div className="loading-container">
                     <div className="loading"></div>
