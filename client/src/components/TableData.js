@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import useFetch from '../hooks/useFetch';
 
 const TableData = ({ setTableData }) => {
-    const { data } = useFetch('stats/table');
+    const { data } = useFetch('/stats/table', 'table');
 
     useEffect(() => {
         if (data) {

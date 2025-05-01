@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import useFetch from '../hooks/useFetch';
 
 const GetTeams = ({ setTeams }) => {
-    const { data } = useFetch('teams');
+    const { data } = useFetch('/teams', 'teams');
 
     useEffect(() => {
         if (data) {
