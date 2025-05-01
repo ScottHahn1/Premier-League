@@ -1,20 +1,22 @@
-import { useEffect, useState } from "react";
+import { useQuery } from '@tanstack/react-query';
 
-const useFetch = (restOfUrl, params) => {
-    const [data, setData] = useState(null);
-    const [error, setError] = useState(null);
-    const queryString = params ? `?${new URLSearchParams(params).toString()}` : '';
-    const apiUrl = process.env.NODE_ENV === 'production' ? 
-    `https://premier-league-backend.vercel.app/${restOfUrl}${queryString}` : `http://localhost:8500/${restOfUrl}${queryString}`
+const useFetch = (endpointPath, queryKey, staleTime) => {
+    const apiUrl = `https://premier-league-backend.vercel.app${endpointPath}`;
 
-    useEffect(() => {
-        fetch(apiUrl)
-        .then(res => res.json())
-        .then(data => setData(data))
-        .catch(err => setError(err.message))
-    }, [apiUrl])
+    const fetchData = async () => {
+        const res = await fetch(apiUrl);
+        const data = await res.json();
+        return data;
+    };
 
-    return { data, error };
+    const { data, isLoading, isError, error } = useQuery({
+        queryKey: [queryKey],
+        queryFn: fetchData,
+        cacheTime: 900000,
+        staleTime: staleTime && staleTime
+    });
+
+    return { data, isLoading, isError, error };
 }
 
 export default useFetch;
