@@ -1,19 +1,19 @@
-const express = require('express');
-const cors = require('cors');
-const { highlightsRouter } = require('./routes/highlights');
-const dotenv = require('dotenv');
-const { newsRouter } = require('./routes/news');
-const { statsRouter } = require('./routes/stats');
-const { teamsRouter } = require('./routes/teams');
-const { fixturesRouter } = require('./routes/fixtures');
-const { resultsRouter } = require('./routes/results');
+import express, { json } from 'express';
+import cors from 'cors';
+import highlightsRouter from './routes/highlights.js';
+import { config } from 'dotenv';
+import newsRouter from './routes/news.js';
+import statsRouter from './routes/stats.js';
+import teamsRouter from './routes/teams.js';
+import fixturesRouter from './routes/fixtures.js';
+import resultsRouter from './routes/results.js';
 
-dotenv.config();
+config();
 const app = express();
 
 const PORT = process.env.PORT || 8500;
 
-app.use(express.json());
+app.use(json());
 app.use(cors());
 
 app.use('/highlights', highlightsRouter);
