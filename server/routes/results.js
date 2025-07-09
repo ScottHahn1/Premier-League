@@ -1,24 +1,57 @@
-const express = require('express');
-const dotenv = require('dotenv');
+import { Router } from 'express';
+import { config } from 'dotenv';
 
-dotenv.config();
+config();
 
-const resultsRouter = express.Router();
+const resultsRouter = Router();
 
 resultsRouter.get('/', async (req, res) => {
     try {
-        const allRoundsData = [];
-        for (let round = 1; round <= 38; round++) {
-            const response = await fetch(`https://www.thesportsdb.com/api/v1/json/3/eventsround.php?id=4328&r=${round}&s=2024-2025`);
-            const data = await response.json();
-            data.events && allRoundsData.push(...data.events);
-        }
-    
-        const results = allRoundsData.filter(event => {
-            return new Date(event.dateEvent).toISOString().slice(0, 10) <= new Date().toISOString().slice(0, 10);
-        })
+        const response = await fetch('https://www.thesportsdb.com/api/v1/json/123/eventspastleague.php?id=4328');
 
-        let groupedResults = results.reduce(function (a, b) {
+        if (!response.ok) {
+            throw new Error(`Failed to fetch results: ${response.status} ${response.statusText}`)
+        };
+
+        const data = await response.json();
+        const round = data.events[0].intRound;
+
+        res.status(200).send(round);
+    }  catch(err) {
+        return res.status(500).json({ error: 'Failed to fetch fixtures data' });
+    };
+});
+
+
+resultsRouter.get('/:round', async (req, res) => {
+    try {
+        const { round } = req.params;
+
+        const response = await fetch(`https://www.thesportsdb.com/api/v1/json/123/eventsround.php?id=4328&r=${round}&s=2024-2025`);
+
+        if (!response.ok) {
+            throw new Error(`Failed to fetch results: ${response.status} ${response.statusText}`)
+        };
+
+        const data = await response.json();
+
+        const shortenNames = {
+            'Brighton and Hove Albion': 'Brighton',
+            'Wolverhampton Wanderers': 'Wolves',
+            'American Express Stadium': 'AMEX Stadium',
+            'Brentford Community Stadium': 'Brentford Stadium',
+            'Tottenham Hotspur Stadium': 'Tottenham Stadium',
+        };
+
+        const updatedResults = data.events.map(result => ({
+                ...result,
+                strHomeTeam: shortenNames[result.strHomeTeam] || result.strHomeTeam,
+                strAwayTeam: shortenNames[result.strAwayTeam] || result.strAwayTeam,
+                strVenue: shortenNames[result.strVenue] || result.strVenue
+            })
+        );
+
+        let groupedResults = updatedResults.reduce(function (a, b) {
             a[b.dateEvent] = a[b.dateEvent] || [];
             a[b.dateEvent].push(b);
             return a;
@@ -34,4 +67,4 @@ resultsRouter.get('/', async (req, res) => {
     }
 });
 
-module.exports = { resultsRouter };
+export default resultsRouter;
