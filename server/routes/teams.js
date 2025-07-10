@@ -1,18 +1,23 @@
-const express = require('express');
-const dotenv = require('dotenv');
+import { Router } from 'express';
+import { config } from 'dotenv';
 
-dotenv.config();
+config();
 
-const teamsRouter = express.Router();
+const teamsRouter = Router();
 
 teamsRouter.get('/', async (req, res) => {
     try {
         const response = await fetch('https://www.thesportsdb.com/api/v1/json/3/search_all_teams.php?l=English%20Premier%20League');
+        
+        if (!response.ok) {
+            throw new Error(`Failed to fetch teams: ${response.status} ${response.statusText}`)
+        }
+
         const data = await response.json();
-        res.status(200).send(data);
+        return res.status(200).send(data.teams);
     }  catch(err) {
-        return res.status(500).json({ error: 'Failed to fetch teams data' });
+        return res.status(500).json({ error: err.message });
     }
 });
 
-module.exports = { teamsRouter };
+export default teamsRouter;

@@ -1,8 +1,8 @@
-const express = require('express');
-const dotenv = require('dotenv');
+import { Router } from 'express';
+import { config } from 'dotenv';
 
-dotenv.config();
-const highlightsRouter = express.Router();
+config();
+const highlightsRouter = Router();
 
 highlightsRouter.get('/', async (req, res) => {
     const options = {
@@ -15,6 +15,11 @@ highlightsRouter.get('/', async (req, res) => {
 
     try {
         const response = await fetch('https://free-football-soccer-videos.p.rapidapi.com/', options);
+
+        if (!response.ok) {
+            throw new Error(`Failed to fetch highlights videos: ${response.status} ${response.statusText}`)
+        };
+
         const data = await response.json();
         res.status(200).send(data);
     }  catch(err) {
@@ -22,4 +27,4 @@ highlightsRouter.get('/', async (req, res) => {
     }
 });
 
-module.exports = { highlightsRouter };
+export default highlightsRouter;
