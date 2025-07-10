@@ -1,5 +1,7 @@
 import { Router } from 'express';
 import { config } from 'dotenv';
+import { shortenNames } from '../utils/shortenNames.js';
+import { abbreviatedNames } from '../utils/abbreviateTeams.js';
 
 config();
 
@@ -34,16 +36,10 @@ fixturesRouter.get('/:round', async (req, res) => {
 
         const data = await response.json();
  
-        const shortenNames = {
-            'Brighton and Hove Albion': 'Brighton',
-            'Wolverhampton Wanderers': 'Wolves',
-            'American Express Stadium': 'AMEX Stadium',
-            'Brentford Community Stadium': 'Brentford Stadium',
-            'Tottenham Hotspur Stadium': 'Tottenham Stadium',
-        };
-
         const updatedFixtures = data.events.map(fixture => ({
                 ...fixture,
+                strAbbHomeTeam: abbreviatedNames[fixture.strHomeTeam],
+                strAbbAwayTeam: abbreviatedNames[fixture.strAwayTeam],
                 strHomeTeam: shortenNames[fixture.strHomeTeam] || fixture.strHomeTeam,
                 strAwayTeam: shortenNames[fixture.strAwayTeam] || fixture.strAwayTeam,
                 strVenue: shortenNames[fixture.strVenue] || fixture.strVenue
