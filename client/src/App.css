@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 body {
     margin: 0;
     overflow-x: hidden;
@@ -22,4 +24,20 @@ body {
     font-family: 'Poppins';
     font-weight: 600;
     font-style: italic;
+}
+
+@theme {
+    --color-darkpurple: rgb(56, 0, 60);
+    --animate-fade-in: fade-in 1s ease-in forwards;
+    --animate-loading: loading 1s infinite;
+
+    @keyframes fade-in {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    @keyframes loading {
+        from { width: 1rem; }
+        to { width: 30rem; }
+    }
 }
