@@ -1,25 +1,23 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
 import RenderFixtures from '../components/RenderFixtures';
-import '../styles/Fixtures.css';
-import GetTeams from '../components/GetTeams';
-import useFetch from '../hooks/useFetch';
+import { useFetch } from '../hooks/useFetch';
 
 const Fixtures = () => {
-    const [teams, setTeams] = useState([]);
+    const { data: round, isLoading } = useFetch('/fixtures', ['fixturesRound']);
 
-    const { data: fixtures, isLoading } = useFetch('/fixtures', 'fixtures');
+    if (!round || isLoading) {
+        return null;
+    }
 
     return (
         <>
-            <div className='fixtures-heading'>
+            <div className='bg-darkpurple mt-4 py-16 flex items-center text-4xl text-white pl-2'>
                 <h1>Fixtures</h1>
             </div> 
             
-            <GetTeams setTeams={setTeams} />
-            <RenderFixtures fixtures={fixtures} teams={teams} loading={isLoading} />
+            <RenderFixtures round={round} />
         </>
-    )
+    );
 };
 
 export default Fixtures;
