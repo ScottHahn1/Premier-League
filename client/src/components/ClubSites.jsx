@@ -1,49 +1,49 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
-import useFetch from '../hooks/useFetch';
+import { useFetch } from '../hooks/useFetch';
 
 const ClubSites = () => {
-    const [teams, setTeams] = useState([]);
+    const { data: clubs, isLoading, isError } = useFetch('/teams', ['clubSites'], true, Infinity);
 
-    const { data, isLoading } = useFetch('/teams', 'clubSites', Infinity);
+    if (isError) {
+        return null;
+    }
 
-    useEffect(() => {
-        if (data) {
-            setTeams({ 
-                logo: data?.teams.map(team => team.strBadge), 
-                website: data?.teams.map(team => team.strWebsite) 
-            });
-        }
-    }, [data])
+    if (isLoading) {
+        return (
+            <div className='flex justify-center mt-4'>
+                <div 
+                  className='h-[0.2rem] bg-gradient-to-r from-pink-500 via-pink-500 to-orange-500 animate-loading' 
+                />
+            </div>          
+        ) 
+    }
+
+    if (!clubs || clubs.length === 0) {
+        return null;
+    };
 
     return (
         <>
-            {
-                teams.logo &&
-                <div className='club-sites'>
-                    <h4 id='club-sites-heading' style={{color: 'gray'}}>Club Sites &#8594;</h4> 
-                    {
-                        teams.logo.map((logo, index) =>
-                            <a 
-                                key={index}
-                                rel='noreferrer'
-                                href={ `//${teams.website[index]}` } 
-                                target='_blank'>
-                                <img className='site-badges' src={logo} alt={`${logo} logo`} /> 
-                            </a>
-                        )
-                    }
-                </div>
-            }
-
-            {
-                isLoading &&
-                <div className='loading-container'>
-                    <div className='loading'></div>
-                </div> 
-            }
+            <div className='flex items-center justify-center lg:gap-2 xl:gap-4'>
+                <span className='text-gray-500 xl:text-lg'>Club Sites &#8594;</span> 
+                {
+                    <div className='flex py-1 gap-1 lg:gap-3 xl:gap-4'>
+                        {
+                            clubs.map(club =>
+                                <a 
+                                    key={club.idTeam}
+                                    rel='noreferrer'
+                                    href={`//${club.strWebsite}`}
+                                    target='_blank'>
+                                    <img className='w-8 h-8 xl:w-9 h-9' src={club.strBadge} alt={`${club.strTeam}'s logo`} /> 
+                                </a>
+                            )
+                        }
+                    </div>
+                }
+            </div>
         </>
-    )
+    );
 };
 
 export default ClubSites;
