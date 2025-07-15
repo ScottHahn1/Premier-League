@@ -1,33 +1,23 @@
-import React, { useEffect } from 'react'
-import { useState } from 'react';
+import React from 'react'
 import RenderResults from '../components/RenderResults';
-import '../styles/Results.css';
-import useFetch from '../hooks/useFetch';
+import { useFetch } from '../hooks/useFetch';
 
 const Results = () => {
-    const [loading, setLoading] = useState(true);
-    const { data: results } = useFetch('/results', 'results');
+     const { data: round, isLoading } = useFetch('/results', ['resultsRound']);
 
-    useEffect(() => {
-        results && setLoading(false);
-    }, [results])
+    if (!round || isLoading) {
+        return null;
+    }
 
     return (
-        <div>
-            <div className='results-heading'>
+        <>
+            <div className='bg-darkpurple mt-4 py-16 flex items-center text-4xl text-white pl-2'>
                 <h1>Results</h1>
-            </div>
-
-            {
-                !loading ? 
-                <RenderResults results={results.reverse()} />
-                :
-                <div className="loading-container">
-                    <div className="loading"></div>
-                </div>
-            }
-        </div>
-    )
+            </div> 
+            
+            <RenderResults round={round} />
+        </>
+    );
 };
 
 export default Results;
