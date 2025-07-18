@@ -1,56 +1,102 @@
-import SeasonNotStarted from "./SeasonNotStarted";
+import useIntersectionObserver from "../hooks/useIntersectionObserver";
+import { useFetchInfinite } from "../hooks/useFetch";
 
-const RenderFixtures = ({ fixtures, teams, loading }) => {
+const getNextPage = (lastPage) => {
+  const currentRound = parseInt(lastPage[0][0].intRound);
+  const nextRound = currentRound + 1;
+  return nextRound <= 38 ? nextRound : undefined;
+};
+
+const RenderFixtures = ({ round }) => {
+    const { 
+        data: fixtures, 
+        isLoading: isLoading,
+        fetchNextPage,
+        hasNextPage,
+        isFetchingNextPage
+    } = useFetchInfinite('/fixtures', ['fixtures', round], round, getNextPage);
+
+    const lastItemRef = useIntersectionObserver(fetchNextPage, hasNextPage, isFetchingNextPage);
+
+    if (isLoading) {
+        return (
+            <div className='flex justify-center mt-4'>
+                <div 
+                    className='h-[0.2rem] bg-gradient-to-r from-pink-500 via-pink-500 to-orange-500 animate-loading' 
+                />
+            </div> 
+        );
+    }
+
+    if (!fixtures || !fixtures.pages?.length) {
+        return null;
+    }
+
     return (
         <>
             {
-                loading === false ? 
-                fixtures.map((fixtureGroup, index) =>
-                    <div key={index} className='fixtures'>
-                        <h1 id='fixture-date'>
-                            { new Date(fixtures[index][0].dateEvent).toDateString() }
-                        </h1>
-                        { fixtures[index].map((item, index) => (
-                            <div key={`${index} ${index += 1}`} className='fixtures-container'>
-                                <p>
-                                    {item.strHomeTeam}
-                                </p>
-                                { 
-                                    teams.filter(team => team.name === item.strHomeTeam)
-                                    .map(team => <img key={`${index} ${index += 3}`} className='home-badge' src={team.badge} /> ) 
-                                }
-                                <p> 
-                                    { Array.from(item.strTime).slice(0, 5) } 
-                                </p>
-                                { 
-                                    teams.filter(team => team.name === item.strAwayTeam)
-                                    .map(team => <img key={`${index} ${index += 5}`} className='away-badge' src={team.badge} /> ) 
-                                }
-                                <p>
-                                    {item.strAwayTeam}
-                                </p>
-                                <img 
-                                    width='50px' 
-                                    src='https://cdn4.iconfinder.com/data/icons/buildings-and-structures-3/512/sports___stadium_soccer_football_fitness_building.png' 
-                                />
-                                <p>
-                                    {item.venue}
-                                </p>
-                            </div>
-                        ))}
-                    </div>
-                ) 
-                : 
-                <div className='loading-container'>
-                    <div className='loading'></div>
-                </div>
-            }
+                fixtures?.pages?.map((group, groupIndex) => (
+                    <div key={`group-${groupIndex}`} className='w-full gap-4 animate-fade-in'>
+                        {
+                            group?.map((date, dateIndex) => (
+                                <div key={`date-${groupIndex}-${dateIndex}`} className='flex flex-col mt-2 gap-2'>
+                                    <h2 className='text-3xl font-semibold text-[rgb(233,0,82)] mx-auto mt-2 lg:pl-2 lg:mx-0'>
+                                        { 
+                                            new Date(
+                                                fixtures.pages[groupIndex][dateIndex][0].dateEvent
+                                            ).toDateString() 
+                                        }
+                                    </h2>
 
-            { 
-                loading === false && !fixtures && <SeasonNotStarted />
+                                    {
+                                        date.map((fixture) => (
+                                            <div key={fixture.idEvent}>
+                                                <div className='text-xl font-medium p-2 rounded
+                                                    grid grid-cols-1 gap-y-2 items-center justify-items-center
+                                                    md:grid-cols-[1fr_2fr_1fr_2fr_1fr_2fr]
+                                                    lg:grid-cols-[1fr_2fr_1fr_2fr_1fr_1fr_2fr]
+                                                    md:text-base lg:text-lg xl:text-xl
+                                                    hover:hover:bg-[linear-gradient(to_right,_rgb(8,_88,_209),_rgb(7,_224,_231))]
+                                                    hover:hover:text-white'
+                                                >
+                                                    <img 
+                                                        className='w-12 md:w-9 lg:w-12' 
+                                                        src={fixture.strHomeTeamBadge} 
+                                                        alt={`${fixture.strHomeTeam}'s club badge`}
+                                                    />
+                                                    <span>{fixture.strHomeTeam}</span>
+                                                    <img 
+                                                        className='w-12 md:w-9 lg:w-12' 
+                                                        src={fixture.strAwayTeamBadge} 
+                                                        alt={`${fixture.strAwayTeam}'s club badge`}
+                                                    />
+                                                    <span>{fixture.strAwayTeam}</span>
+                                                    <span className='font-normal'>
+                                                        {Array.from(fixture.strTime).slice(0, 5)}
+                                                    </span>
+                                                    <img 
+                                                        className='w-12 md:hidden lg:block' 
+                                                        src='https://cdn4.iconfinder.com/data/icons/buildings-and-structures-3/512/sports___stadium_soccer_football_fitness_building.png'
+                                                        alt='Generic Stadium' 
+                                                    />
+                                                    <span className='font-normal md:text-sm lg:text-base'>
+                                                        @ {fixture.strVenue}
+                                                    </span>
+                                                </div>
+
+                                                <div className='h-0.5 w-[85%] mx-auto bg-slate-400 mt-2 lg:hidden' />
+                                            </div>
+                                        ))
+                                    }
+                                </div>
+                            ))
+                        }
+                        <div ref={lastItemRef} />
+                    </div>
+                ))
             }
         </>
-    )
+    );
 };
 
 export default RenderFixtures;
