@@ -23,26 +23,24 @@ const ClubSites = () => {
     };
 
     return (
-        <>
-            <div className='flex items-center justify-center lg:gap-2 xl:gap-4'>
-                <span className='text-gray-500 xl:text-lg'>Club Sites &#8594;</span> 
-                {
-                    <div className='flex py-1 gap-1 lg:gap-3 xl:gap-4'>
-                        {
-                            clubs.map(club =>
-                                <a 
-                                    key={club.idTeam}
-                                    rel='noreferrer'
-                                    href={`//${club.strWebsite}`}
-                                    target='_blank'>
-                                    <img className='w-8 h-8 xl:w-9 h-9' src={club.strBadge} alt={`${club.strTeam}'s logo`} /> 
-                                </a>
-                            )
-                        }
-                    </div>
-                }
-            </div>
-        </>
+        <div className='hidden md:flex md:items-center md:justify-center lg:gap-2 xl:gap-4'>
+            <span className='text-gray-500 xl:text-lg'>Club Sites &#8594;</span> 
+            {
+                <div className='flex py-1 gap-1 lg:gap-3 xl:gap-4'>
+                    {
+                        clubs.map(club =>
+                            <a 
+                                key={club.idTeam}
+                                rel='noreferrer'
+                                href={`//${club.strWebsite}`}
+                                target='_blank'>
+                                <img className='w-8 h-8 xl:w-9 h-9' src={club.strBadge} alt={`${club.strTeam}'s logo`} /> 
+                            </a>
+                        )
+                    }
+                </div>
+            }
+        </div>
     );
 };
 
