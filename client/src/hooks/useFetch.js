@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
+import { useInfiniteQuery } from '@tanstack/react-query';
 
 const useFetch = (endpointPath, queryKey, enabled = true, staleTime) => {
     const apiUrl = `http://localhost:8500${endpointPath}`;
@@ -13,9 +14,8 @@ const useFetch = (endpointPath, queryKey, enabled = true, staleTime) => {
         const data = await res.json();
         return data;
     };
-// console.log('queryKey passed to useQuery:', queryKey);
 
-    const { data, isLoading, isError, error, refetch } = useQuery({
+    const { data, isLoading, isError, error } = useQuery({
         queryKey,
         queryFn: fetchData,
         enabled,
@@ -23,7 +23,7 @@ const useFetch = (endpointPath, queryKey, enabled = true, staleTime) => {
         staleTime: staleTime
     });
 
-    return { data, isLoading, isError, error, refetch };
+    return { data, isLoading, isError, error };
 };
 
 const useFetchInfinite = (endpointPath, queryKey, initialPage, getNextPage) => {
