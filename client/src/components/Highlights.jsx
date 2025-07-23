@@ -1,33 +1,31 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
 import parse from 'html-react-parser';
-import useFetch from '../hooks/useFetch';
+import { useFetch } from '../hooks/useFetch';
 
 const Highlights = () => {
-    const [videos, setVideos] = useState([]);
+    const { data: videos } = useFetch('/highlights', ['highlights']);
 
-    const { data } = useFetch('/highlights', 'highlights');
+    if (!videos?.length) {
+        return null;
+    }
 
-    useEffect(() => {
-        data && setVideos(data.filter(item => item.competition.name === 'ENGLAND: Premier League'));
-    }, [data])
-    
     return (  
-        <div className='highlights-container'>
-            {
-                videos.length > 0 && 
-                <h1 id='highlights'>
-                    Highlights
-                </h1>
-            }
-            <div className='highlights'>
+        <div>
+            <h2 className='text-3xl font-semibold my-2'>
+                Highlights
+            </h2>
+
+            <div className='bg-pink-800 my-2 flex flex-col items-center md:flex-row md:flex-wrap'>
                 {videos.map((item, index) => (
-                    <div key={index} className='highlight'> 
-                        { parse(item.videos[0].embed.toString())} 
-                        <h4>
+                    <div key={index} className='my-4 w-full md:w-1/2 lg:w-1/3 bg-yellow-500'>  
+                        <div className='w-full md:w-[95%]'>
+                            { parse(item.videos[0].embed.toString())} 
+                        </div>
+
+                        <span className='line-clamp-1 lg:w-[95%]'>
                             {item.title}
-                        </h4>  
-                        <p className='poppins-semiBold-italic' style={{color: 'rgb(233,0,82)'}}>
+                        </span>  
+                        <p className='poppins-semiBold-italic text-pink'>
                             { new Date(item.date).toString().slice(0, 15) }
                         </p> 
                     </div>
