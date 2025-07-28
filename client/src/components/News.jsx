@@ -1,43 +1,36 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
-import useFetch from '../hooks/useFetch';
+import { useFetch } from '../hooks/useFetch';
 
 const News = () => {
-    const [news, setNews] = useState([]);
+    const { data } = useFetch('/news', ['news']);
 
-    const { data } = useFetch('/news', 'news');
-
-    useEffect(() => {
-        if (data) {
-            const newsData = data.articles.filter(article => article.images.length).map(article => ({
-                image: article.images[0].url, 
-                title: article.headline, 
-                description: article.description, 
-                link: article.links.web.href
-            }));
-
-            setNews(newsData);
-        }
-    }, [data]);
+    if (!data?.articles?.length) {
+        return null;
+    }
 
     return (
-        <div className='news-container'>
-            <h1 id='latest-news'>Latest News</h1>
-            <div className='news'>
-                {news.map((item, index) => (
-                    <div key={index} onClick={() => window.open(item.link)} className='news-items'> 
-                        <div key={`${index} ${index ++}`}>
-                            <img key={`${index} ${index += 2}`} id='news-image' src={item.image} alt='' /> 
+        <div className='text-center md:text-left'>
+            <h2 className='text-3xl font-bold my-5'>Latest News</h2>
+
+            <div className='flex flex-col md:gap-2 md:flex-row md:flex-wrap lg:gap-8 xl:gap-4'>
+                {data.articles.map(article => (
+                    <div 
+                        key={article.nowId} 
+                        onClick={() => window.open(article.links.web.href)} 
+                        className='my-1 h-full w-full md:w-[45%] lg:w-[30%]'
+                    > 
+                        <div>
+                            <img className='w-full' src={article.images[0].url} alt='news story' /> 
                         </div>
 
-                        <div key={`${index} ${index += 3}`} id='news-titles'>
-                            <p key={`${index} ${index += 4}`}> {item.title} </p>
-                            <hr></hr>
+                        <div className='h-15 md:h-20 flex flex-col overflow-hidden my-1'>
+                            <span className='font-medium'>{article.headline}</span>
+                            <hr className='mt-auto'></hr>
                         </div>
 
-                        <div key={`${index} ${index += 5}`}>
-                            <p key={`${index} ${index += 6}`} id='news-description'>{item.description}</p>
-                            <br></br>
+                        <div>
+                            <p className='text-xs line-clamp-3'>{article.description}</p>
                         </div>
                     </div> 
                 ))}
