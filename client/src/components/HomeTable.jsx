@@ -1,43 +1,47 @@
 import React from "react";
-import { useState } from "react";
-import TableData from "./TableData";
+import { useFetch } from '../hooks/useFetch';
+import { Fragment } from "react";
 
 const HomeTable = () => {
-    const [tableData, setTableData] = useState([])
+    const { data, isLoading } = useFetch('/stats/table', ['table']);
+
+    if (isLoading || !data?.length) {
+        return null;
+    }
 
     return (
-        <div className='home-table'>
-            <TableData setTableData={setTableData} />
+        <div className='mt-10 ml-2 border-1 border-black grid grid-cols-[auto_auto_auto_auto_auto] gap-2 text-xs'>
+            <span className='font-medium'>Pos</span>
+            <span />
+            <span className='font-medium'>Club</span>
+            <span className='font-medium'>Gd</span>
+            <span className='font-medium'>Pts</span>
+            {data?.table.map(team => (
+                <Fragment key={team.idTeam}>
+                    <span className='col-span-1'>
+                        {team.intRank}
+                    </span>
 
-            <div className='home-table-positions'>
-                <h3>Pos</h3>
-                {tableData.position && tableData.position.map((position, index) => <p key={`${index}0`}>{position}</p>)}
-            </div>
-            
-            <div className='home-table-badges'>
-                <h3>Badge</h3>
-                {tableData.teamBadge && tableData.teamBadge.map((badge, index) => <img key={`${index}1`} src={badge} alt='Club badge' />)}
-            </div>
+                    <img 
+                        className='col-span-1 w-7'
+                        src={team.strBadge}
+                        alt='Team badge'
+                    / >
+                    {/*</img>*/}
 
-            <div className='home-table-names'>
-                <h3>Club</h3>
-                {tableData.teamName && tableData.teamName.map((name, index) => <p key={`${index}2`}>{name}</p>)}
-            </div>
+                    <span className='col-span-1'>
+                        {team.strTeam}
+                    </span>
 
-            <div className='home-table-played'>
-                <h3>Pl</h3>
-                {tableData.gamesPlayed && tableData.gamesPlayed.map((played, index) => <p key={`${index}3`}>{played}</p>)}
-            </div>
+                    <span className='col-span-1'>
+                        {team.intGoalDifference}
+                    </span>
 
-            <div className='home-table-gd'>
-                <h3>Gd</h3>
-                {tableData.goalDifference && tableData.goalDifference.map((gd, index) => <p key={`{${index}}4`}>{gd}</p>)}
-            </div>
-
-            <div className='home-table-points'>
-                <h3>Pts</h3>
-                {tableData.points && tableData.points.map((points, index) => <p key={`${index}5`}>{points}</p>)}
-            </div>
+                    <span className='col-span-1'>
+                        {team.intPoints}
+                    </span>
+                </Fragment>
+            ))}
         </div>
     )
 };
