@@ -29,7 +29,9 @@ newsRouter.get('/article', async (req, res) => {
         };
 
         const data = await response.json();
-        res.status(200).send(data);
+        const article = data.articles[Math.floor(Math.random() * data.articles.length)];
+
+        res.status(200).send(article);
     }  catch(err) {
         return res.status(500).json({ error: 'Failed to fetch news data' });
     }
