@@ -13,21 +13,19 @@ import './App.css';
 function App() {
   return (
     <Router>
-      <Navbar />
-      <div className="app">
-        <div className="content-wrapper poppins">
-          <Routes>
-            <Route path='/' element={ <Home /> } />
-            <Route path='/fixtures' element={ <Fixtures /> } />
-            <Route path='/results' element={ <Results /> } />
-            <Route path='/table' element={ <Table /> } />
-            <Route path='/campaign' element={ <Campaign /> } />
-            <Route path='/action-plan' element={ <ActionPlan /> } />
-            <Route path='/reportracism' element={ <Reporting /> } />
-          </Routes>
-        </div>
+      <div className='box-border poppins'>
+        <Navbar />
+        <Routes>
+          <Route path='/' element={ <Home /> } />
+          <Route path='/fixtures' element={ <Fixtures /> } />
+          <Route path='/results' element={ <Results /> } />
+          <Route path='/table' element={ <Table /> } />
+          <Route path='/campaign' element={ <Campaign /> } />
+          <Route path='/action-plan' element={ <ActionPlan /> } />
+          <Route path='/reportracism' element={ <Reporting /> } />
+        </Routes>
+        <Footer />
       </div>
-      <Footer />
     </Router>
   )
 };
