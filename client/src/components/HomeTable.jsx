@@ -5,12 +5,12 @@ import { Fragment } from "react";
 const HomeTable = () => {
     const { data, isLoading } = useFetch('/stats/table', ['table']);
 
-    if (isLoading || !data?.length) {
+    if (isLoading || !data?.table?.length) {
         return null;
     }
 
     return (
-        <div className='mt-10 ml-2 border-1 border-black grid grid-cols-[auto_auto_auto_auto_auto] gap-2 text-xs'>
+        <div className='mt-10 ml-2 border-1 border-slate-400 rounded-lg px-1 grid grid-cols-[auto_auto_auto_auto_auto] gap-2 text-sm'>
             <span className='font-medium'>Pos</span>
             <span />
             <span className='font-medium'>Club</span>
@@ -27,9 +27,8 @@ const HomeTable = () => {
                         src={team.strBadge}
                         alt='Team badge'
                     / >
-                    {/*</img>*/}
 
-                    <span className='col-span-1'>
+                    <span className='col-span-1 truncate'>
                         {team.strTeam}
                     </span>
 
