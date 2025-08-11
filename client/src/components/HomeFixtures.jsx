@@ -11,15 +11,15 @@ const HomeFixtures = () => {
     }
 
     return (
-        <div className='bg-black text-white text-center ml-2'>
-            <h1 className='text-pink-600 text-2xl font-medium'>
+        <div className=' text-center ml-2 mt-4 border-1 border-slate-400 rounded-lg'>
+            <h2 className='rounded-tr-lg rounded-tl-lg bg-[linear-gradient(270deg,_rgb(255,40,130)_30%,_rgb(255,105,0))] text-white text-2xl font-medium'>
                 Upcoming Fixtures
-            </h1> 
+            </h2> 
 
             {
                 fixtures.map((group, groupIndex) => (
                     <div key={groupIndex} className='text-center flex flex-col gap-2 mt-2'>
-                        <h2>{new Date(group[0].dateEvent).toDateString()}</h2>
+                        <h3 className='bg-[linear-gradient(270deg,_rgb(255,40,130)_30%,_rgb(255,105,0))] text-white'>{new Date(group[0].dateEvent).toDateString()}</h3>
                         {
                             group.map(fixture => (
                                 <div key={fixture.idEvent} className='grid grid-cols-5 gap-1 items-center'>
